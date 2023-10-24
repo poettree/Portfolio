@@ -1,0 +1,10 @@
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\bin\Debug\Conveyor.exe.config
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\bin\Debug\Conveyor.exe
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\bin\Debug\Conveyor.pdb
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\obj\Debug\Conveyor.csproj.AssemblyReference.cache
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\obj\Debug\Conveyor.Form1.resources
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\obj\Debug\Conveyor.Properties.Resources.resources
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\obj\Debug\Conveyor.csproj.GenerateResource.cache
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\obj\Debug\Conveyor.csproj.CoreCompileInputs.cache
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\obj\Debug\Conveyor.exe
+F:\Portfolio\Portfolio\Csharp\Conveyor\Conveyor\Conveyor\obj\Debug\Conveyor.pdb
