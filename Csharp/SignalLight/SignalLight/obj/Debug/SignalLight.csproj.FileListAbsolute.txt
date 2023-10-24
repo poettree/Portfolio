@@ -1,0 +1,10 @@
+F:\Programs\C#\SignalLight\SignalLight\bin\Debug\SignalLight.exe.config
+F:\Programs\C#\SignalLight\SignalLight\bin\Debug\SignalLight.exe
+F:\Programs\C#\SignalLight\SignalLight\bin\Debug\SignalLight.pdb
+F:\Programs\C#\SignalLight\SignalLight\obj\Debug\SignalLight.csproj.AssemblyReference.cache
+F:\Programs\C#\SignalLight\SignalLight\obj\Debug\SignalLight.Properties.Resources.resources
+F:\Programs\C#\SignalLight\SignalLight\obj\Debug\SignalLight.csproj.GenerateResource.cache
+F:\Programs\C#\SignalLight\SignalLight\obj\Debug\SignalLight.csproj.CoreCompileInputs.cache
+F:\Programs\C#\SignalLight\SignalLight\obj\Debug\SignalLight.exe
+F:\Programs\C#\SignalLight\SignalLight\obj\Debug\SignalLight.pdb
+F:\Programs\C#\SignalLight\SignalLight\obj\Debug\SignalLight.Form1.resources
