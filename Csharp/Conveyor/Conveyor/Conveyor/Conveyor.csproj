@@ -38,6 +38,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FireSharp, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FireSharp.1.1.0\lib\net45\FireSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="FireSharp.Serialization.JsonNet, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FireSharp.Serialization.JsonNet.1.1.0\lib\net45\FireSharp.Serialization.JsonNet.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Api.CommonProtos, Version=2.10.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Api.CommonProtos.2.10.0\lib\net461\Google.Api.CommonProtos.dll</HintPath>
     </Reference>
@@ -104,6 +110,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -151,6 +160,7 @@
     <Compile Include="CConveyor4.cs" />
     <Compile Include="CConveyorS.cs" />
     <Compile Include="CDevice.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +192,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="test-59f8d-firebase-adminsdk-9qsxs-a85d21ac67.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

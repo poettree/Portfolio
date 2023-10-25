@@ -7,63 +7,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
+using Google.Cloud.Firestore;
+using FireSharp.Config;
+using FireSharp.Response;
+using FireSharp.Interfaces;
 
 namespace Conveyor
 {
+
     public partial class Form1 : Form
     {
+
+        FirestoreDb db;
+        IFirebaseConfig config = new FirebaseConfig
+        {
+            AuthSecret = "BmfbGneP3u7fy4SK7MfWpDiqgU7nZpDF6xhbxdtt",
+            BasePath = "https://test-59f8d-default-rtdb.firebaseio.com/"
+        };
+        IFirebaseClient client;
+
         CConveyor1 conveyor1;
         CConveyor2 conveyor2;
-        CConveyor3 conveyor3;
-        CConveyor4 conveyor4;
-        CConveyorS conveyorS;
 
         public Form1()
         {
             InitializeComponent();
             conveyor1 = new CConveyor1();
             conveyor2 = new CConveyor2();
-            conveyor3 = new CConveyor3();
-            conveyor4 = new CConveyor4();
-            conveyorS = new CConveyorS();
+
+
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"test-59f8d-firebase-adminsdk-9qsxs-a85d21ac67.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+
+            db = FirestoreDb.Create("default");
+
+
+
         }
 
-        
+
+        void Add_Document_with_AutoID()
+        {
+            
+        }
+
+
+
+
 
         private void btnTakeIn_Click(object sender, EventArgs e)
         {
             conveyor1.takeIn = true;
             conveyor2.takeIn = true;
-            conveyor3.takeIn = true;
-            conveyor4.takeIn = true;
-            conveyorS.takeIn = true;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             conveyor1.auto = false;
             conveyor2.auto = false;
-            conveyor3.auto = false;
-            conveyor4.auto = false;
-            conveyorS.auto = false;
         }
 
         private void btnTakeOut_Click(object sender, EventArgs e)
         {
             conveyor1.takeOut = true;
             conveyor2.takeOut = true;
-            conveyor3.takeOut = true;
-            conveyor4.takeOut = true;
-            conveyorS.takeOut = true;
         }
 
         private void btnAuto_Click(object sender, EventArgs e)
         {
             conveyor1.auto = true;
             conveyor2.auto = true;
-            conveyor3.auto = true;
-            conveyor4.auto = true;
-            conveyorS.auto = true;
         }
 
         bool convMotionBlink;
@@ -74,9 +88,6 @@ namespace Conveyor
             {
                 btnConveyor1.Text = "";
                 btnConveyor2.Text = "";
-                btnConveyor3.Text = "";
-                btnConveyor4.Text = "";
-                btnConveyorS.Text = "";
                 convMotionBlink = false;
             }
             else 
@@ -87,15 +98,6 @@ namespace Conveyor
                 if (!conveyor2.statusCw && !conveyor2.statusCcw) btnConveyor2.Text = "";
                 else if (conveyor2.statusCw) btnConveyor2.Text = "CW";
                 else if (conveyor2.statusCcw) btnConveyor2.Text = "CCW";
-                if (!conveyor3.statusCw && !conveyor3.statusCcw) btnConveyor3.Text = "";
-                else if (conveyor3.statusCw) btnConveyor3.Text = "CW";
-                else if (conveyor3.statusCcw) btnConveyor3.Text = "CCW";
-                if (!conveyor4.statusCw && !conveyor4.statusCcw) btnConveyor4.Text = "";
-                else if (conveyor4.statusCw) btnConveyor4.Text = "CW";
-                else if (conveyor4.statusCcw) btnConveyor4.Text = "CCW";
-                if (!conveyorS.statusCw && !conveyorS.statusCcw) btnConveyorS.Text = "";
-                else if (conveyorS.statusCw) btnConveyorS.Text = "CW";
-                else if (conveyorS.statusCcw) btnConveyorS.Text = "CCW";
 
                 convMotionBlink = true;
             }
@@ -105,10 +107,84 @@ namespace Conveyor
         {
             conveyor1.Process();
             conveyor2.Process();
-            conveyor3.Process();
-            conveyor4.Process();
-            conveyorS.Process();
+            //conveyor3.Process();
+            //conveyor4.Process();
+            //conveyorS.Process();
         }
 
+        private async void cbSensor1_1_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+        private void cbSensor2_1_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+        public void Delay(int ms)
+        {
+            DateTime dateTimeNow = DateTime.Now;
+            TimeSpan duration = new TimeSpan(0, 0, 0, 0, ms);
+            DateTime dateTimeAdd = dateTimeNow.Add(duration);
+            while (dateTimeAdd >= dateTimeNow)
+            {
+                System.Windows.Forms.Application.DoEvents();
+                dateTimeNow = DateTime.Now;
+            }
+            return;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            client = new FireSharp.FirebaseClient(config);
+
+            if(client != null)
+            {
+                MessageBox.Show("database connected");
+            }
+        }
+
+        private async void cbSensor1_1_Click(object sender, EventArgs e)
+        {
+            var datalayer = new Data
+            {
+                Id = "Sensor1",
+                Value = true
+            };
+
+            conveyor1.sensor1 = true;
+
+            datalayer.Value = true;
+            FirebaseResponse resp = client.Update("/Conveyors/Sensors/" + "Sensor1", datalayer);
+            Data result = resp.ResultAs<Data>();
+
+            Delay(1000);
+            cbSensor1_1.Checked = false;
+            conveyor1.sensor1 = false;
+
+            datalayer.Value = false;
+            resp = client.Update("/Conveyors/Sensors/" + "Sensor1", datalayer);
+        }
+
+        private async void cbSensor2_1_Click(object sender, EventArgs e)
+        {
+
+            var datalayer = new Data
+            {
+                Id = "Sensor2",
+                Value = true
+            };
+
+            conveyor2.sensor1 = true;
+
+            datalayer.Value = true;
+            FirebaseResponse resp = client.Update("/Conveyors/Sensors/" + "Sensor2", datalayer);
+            Data result = resp.ResultAs<Data>();
+
+            Delay(1000);
+            cbSensor2_1.Checked = false;
+            conveyor2.sensor1 = false;
+
+            datalayer.Value = false;
+
+            resp = client.Update("/Conveyors/Sensors/" + "Sensor2", datalayer);
+        }
     }
 }

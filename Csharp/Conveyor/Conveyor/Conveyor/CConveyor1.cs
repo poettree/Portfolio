@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Conveyor
 {
@@ -10,6 +11,7 @@ namespace Conveyor
     {
         public override void Process()
         {
+
             if (bisAutoConv == true)
             {
                 switch (stepConv)
@@ -26,39 +28,33 @@ namespace Conveyor
 
                     case 100:
                         bIsLReq = true;
-                        if (bIsTrReq)
+                        
+                        if(bIsSensorDetect1 == true)
                         {
                             statusCwConv = true;
                             bIsReady = true;
                             stepConv = 110;
                         }
+
                         break;
 
                     case 110:
                         if (bIsBusy)
                         {
                             bIsLReq = false;
-                            stepConv = 120;
+                            stepConv = 0;
                         }
                         break;
 
                     case 120:
-                        if (bIsSensorDetect2)
+                        if (!bIsTrReq&&!bIsBusy&&bIsCompt)
                         {
-                            statusCwConv = false;
+                            bIsReady = false;
                             stepConv = 130;
                         }
                         break;
 
                     case 130:
-                        if (!bIsTrReq&&!bIsBusy&&bIsCompt)
-                        {
-                            bIsReady = false;
-                            stepConv = 140;
-                        }
-                        break;
-
-                    case 140:
                         if (!bIsCompt)
                         {
                             stepConv = 200;
@@ -66,7 +62,7 @@ namespace Conveyor
                         break;
 
                     case 200:
-                        if (!bIsSensorDetect1&& !bIsSensorDetect2)
+                        if (!bIsSensorDetect1)
                         {
                             stepConv = 0;
                         }
@@ -84,7 +80,7 @@ namespace Conveyor
             }
             if (oldStepConv != stepConv)
             {
-                Console.WriteLine("Conveyor  step = {0}", stepConv);
+                Console.WriteLine("Conveyor 1 step = {0}", stepConv);
             }
             oldStepConv = stepConv;
             bisTakeIn = false;

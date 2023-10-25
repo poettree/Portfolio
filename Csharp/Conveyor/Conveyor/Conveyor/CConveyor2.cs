@@ -50,13 +50,14 @@ namespace Conveyor
                         break;
 
                     case 200:
+                        statusCcwConv = true;
                         if (bIsSensorDetect2 == true)
                         {
                             stepConv = 100;
                         }
                         else if (bIsTrReq)
                         {
-                            stepConv = 210;
+                            stepConv = 0;
                             bIsReady = true;
                         }
                         break;
@@ -96,7 +97,7 @@ namespace Conveyor
             }
             if (oldStepConv != stepConv)
             {
-                Console.WriteLine("Conveyor  step = {0}", stepConv);
+                Console.WriteLine("Conveyor 2 step = {0}", stepConv);
             }
             oldStepConv = stepConv;
             bisTakeIn = false;
