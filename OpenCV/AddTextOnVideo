@@ -1,4 +1,5 @@
 import cv2
+import random
 
 #다른 카메라 사용할때 0,1,2번 카메라 등으로 변경 가능
 cap = cv2.VideoCapture(0)
@@ -9,12 +10,30 @@ print(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 cap.set(3, 1280)
 cap.set(4, 720)
 
+count = 0
+rand_x = random.randint(400,800)
+rand_y = random.randint(300,600)
+
 while(cap.isOpened()):
     ret, frame = cap.read()
     
     if ret == True:
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        # text = 'Width: ' + str(cap.get(3)) + ' Height: '+str(cap.get(4))
+        # cv2.putText(frame, text, (10, 50), font, 1, (0,255,255),2, cv2.LINE_AA)
+        text = ['Orange', 'Banana', 'Apple']
         
-
+        
+        if cv2.waitKey(1) & 0xFF == ord('t'):
+            rand_x = random.randint(400,800)
+            rand_y = random.randint(300,600)
+            count+=1
+            
+        if count <= len(text):
+            cv2.putText(frame, text[count], (rand_x,rand_y), font, 1, (0,255,255),2, cv2.LINE_AA)
+        else:
+            break
+        
         #카메라 회색으로    
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         cv2.imshow('frame', gray)    
